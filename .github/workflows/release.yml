@@ -19,13 +19,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
-      - name: "Get tag name"
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-      - name: "Set labels for ${{ github.ref }}"
-        run: |
-          echo "VCS_REF=`git rev-parse --short HEAD`" >> $GITHUB_ENV
-          echo "BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”`" >> $GITHUB_ENV
       - name: "Build and push"
         uses: docker/build-push-action@v2 #note: newer is available
         with:
@@ -35,6 +28,3 @@ jobs:
           push: true
           tags: |
             ghcr.io/adrian-testorg/juice-shop:${{ steps.tag.outputs.tag }}
-          build-args: |
-            VCS_REF=${{ env.VCS_REF }}
-            BUILD_DATE=${{ env.BUILD_DATE }}
