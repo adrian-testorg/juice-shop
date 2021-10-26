@@ -27,4 +27,4 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: |
-            ghcr.io/adrian-testorg/juice-shop:${{ steps.tag.outputs.tag }}
+            ghcr.io/adrian-testorg/juice-shop-image:${{ steps.tag.outputs.tag }}
